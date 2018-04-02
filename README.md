@@ -1,6 +1,6 @@
 # linear_tsun
 
-This is a linear tsunami propagation model in spherical coordinate system.
+This is a linear tsunami propagation model in spherical coordinate system with Perfectly Matched Layer (PML) boundary condition.
 This model is an extension of original tsunami propagation model in cartesian coordinate system written by Maeda (2016).
 Parallel programming is also applied in this model.
 
