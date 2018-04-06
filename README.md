@@ -5,4 +5,4 @@ This model is an extension of original tsunami propagation model in cartesian co
 Parallel programming is also applied in this model.
 
 # References
-Maeda, T., H. Tsushima, and T. Furumura (2016) An effective absorbing boundary condition for linear long-wave and linear dispersive wave tsunami simulations, Earth, Planets, and Space, 68
+Maeda, T., H. Tsushima, and T. Furumura (2016) An effective absorbing boundary condition for linear long-wave and linear dispersive wave tsunami simulations, Earth, Planets, and Space, 68, 63
