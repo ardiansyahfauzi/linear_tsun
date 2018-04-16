@@ -144,6 +144,13 @@ program ldw
   include 'blk_bathymetry.f90'
 
   include 'blk_station.f90'
+  
+  !! Create /out folder
+  !! --
+  if(mov.eq.0)then
+     write(fld,'(a)')'out'
+     call system("mkdir " // trim(adjustl(fld)))
+  endif
 
   !! ----------------------------------------------------------------------- !!
   !>
