@@ -7,7 +7,7 @@
 !! 
 !! The governing equation of LLW is adopted from Nakamura's model.
 !! This code is partially modified by A. Fauzi
-!! Last modified on 2018.2.1
+!! Last modified on 2018.4.20
 !!
 !<
 !! ------------------------------------------------------------------------- !!
@@ -43,6 +43,7 @@ program llw
 
   !! arrays
   real,    allocatable :: eta(:,:)             !< tsunami height
+  real,    allocatable :: zmax(:,:)            !< maximum tsunami height
   real,    allocatable :: mm(:,:)              !< tsunami vel
   real,    allocatable :: nn(:,:)              !< tsunami vel
   real,    allocatable :: hh(:,:)              !< bathymetry
@@ -75,6 +76,7 @@ program llw
     real    :: degrad, secrad
 
     allocate( eta(1:nx,1:ny) )
+    allocate( zmax(1:nx,1:ny) )
     allocate( mm (1:nx,1:ny) )
     allocate( nn (1:nx,1:ny) )
     allocate( hh (1:nx,1:ny) )
@@ -89,6 +91,7 @@ program llw
 
     call system_clock(start,clock_rate,clock_max)
     eta(:,:) = 0.0
+    zmax(:,:) = 0.0
     mm (:,:) = 0.0
     nn (:,:) = 0.0
     
@@ -230,7 +233,6 @@ program llw
 !$OMP END PARALLEL 
   end block
 
-
   !! ----------------------------------------------------------------------- !!
   !>
   !! bathymetry averaging for staggered grid calculation
@@ -263,7 +265,6 @@ program llw
 !$OMP END PARALLEL 
   end block
 
-
   !! ----------------------------------------------------------------------- !!
   !>
   !! define land-filter matrix for reflection boundaries
@@ -288,7 +289,6 @@ program llw
 !$OMP END PARALLEL 
   end block
 
-
   !! ----------------------------------------------------------------------- !!
   !>
   !! CFL stability condition check
@@ -302,7 +302,6 @@ program llw
     end if
 
   end block
-
 
 
   !! ----------------------------------------------------------------------- !!
@@ -357,8 +356,6 @@ program llw
          end do
 !$OMP END DO
 !$OMP END PARALLEL 
-!write(*,*)dxeta(1,100), dxeta(780,382), dyeta(100,1), dyeta(780,382)
-!pause
        end block
        
        !! ------------------------------------------------------------------ !!
@@ -387,8 +384,6 @@ program llw
 !$OMP END DO
 !$OMP END PARALLEL 
        end block update_vel
-
-
 
        !! ------------------------------------------------------------------ !!
        !>
@@ -448,8 +443,6 @@ program llw
 !$OMP END PARALLEL
        end block
 
-
-
        !! ------------------------------------------------------------------ !!
        !>
        !! difference of velocities with respect to x, y
@@ -478,8 +471,6 @@ program llw
 !$OMP END PARALLEL
        end block
 
-
-
        !! ------------------------------------------------------------------ !!
        block
 
@@ -499,8 +490,6 @@ program llw
 !$OMP END DO
 !$OMP END PARALLEL
        end block
-
-
 
        !! ------------------------------------------------------------------ !!
        block
@@ -562,6 +551,22 @@ program llw
        end block
        
        !! ------------------------------------------------------------------ !!
+       ! To calculate maximum tsunami height
+       block
+       
+          integer :: i,j
+          
+          do j=1, ny
+             do i=1, nx
+                if (eta(i,j).gt.zmax(i,j))then
+                   zmax(i,j)= eta(i,j)
+                endif
+             enddo
+          enddo      
+       
+       end block
+       
+       !! ------------------------------------------------------------------ !!
        block
 
          integer :: i
@@ -607,9 +612,10 @@ program llw
   end block
 
   !! ----------------------------------------------------------------------- !!
+  ! To write wave gauges records and maximum tsunami height
   block
 
-    integer :: i, it
+    integer :: i, j, it
     character(256) :: fn
     integer, parameter :: io = 100
     !! --
@@ -624,6 +630,12 @@ program llw
        end do
        close(io)
     end do
+    
+    open(21, file='zmax.dat', status='unknown')
+    do i=1,nx
+       write(21,'(10000f9.2)')(zmax(i,j), j=1,ny)
+    enddo
+    close(21)
 
   end block
 
@@ -631,6 +643,7 @@ program llw
   block
 
     deallocate( eta )
+    deallocate( zmax )
     deallocate( mm  )
     deallocate( nn  )
     deallocate( hh  )
