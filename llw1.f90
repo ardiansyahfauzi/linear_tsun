@@ -23,7 +23,8 @@ program llw
   integer, parameter :: na      = 20           !< absorber thickness
   real,    parameter :: r       = 6371012.0    !< earth radius (m)
   real,    parameter :: omega   = 2.0 * acos(-1.0) / 86400 !< earth rotational velocity (rad/s)
-
+  character(len=20)  :: fld
+  
   !! control parameters
   integer            :: nx,  ny                !< model size
   integer            :: nt, tint               !< time step size and gauge interval
@@ -124,7 +125,7 @@ program llw
      write(fld,'(a)')'out'
      call system("mkdir " // trim(adjustl(fld)))
   endif
-
+  
   !! ----------------------------------------------------------------------- !!
   !>
   !! PML absorber settings
@@ -583,9 +584,9 @@ program llw
        block
       
           integer :: i,j
-          character(len=20):: fileout
+          character(len=20):: fileout, fld
         
-          if (mov.eq.0.0)then      
+          if (mov.eq.0)then      
           if(mod(int(it*dt), 60 )==0) then
              write(fileout,'(a, i5.5, a)')"out/eta_", int(it*dt), ".dat"
              open(21,file=trim(fileout), status='unknown')     
