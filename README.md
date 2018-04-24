@@ -4,6 +4,8 @@ This is a linear tsunami propagation model in spherical coordinate system with P
 This model is an extension of original tsunami propagation model in cartesian coordinate system written by Maeda (2016).
 Parallelization (OpenMP) is also applied in this model.
 
+This model was perfectly run on Ubuntu.
+
 # References
 Maeda, T., H. Tsushima, and T. Furumura (2016) An effective absorbing boundary condition for linear long-wave and linear dispersive wave tsunami simulations, Earth, Planets, and Space, 68, 63
 
@@ -15,7 +17,7 @@ It will include:
 - sub_initheight.f90 (load initial water surface file)
 - sub_station.f90    (load wave gauges file)
 
-If parallel computation is needed, add parallelization command such as "OMP_NUM_THREADS".
+If parallel computation (OpenMP) is needed, add parallelization command such as "OMP_NUM_THREADS".
 For example,
 
     $ export OMP_NUM_THREADS=8
