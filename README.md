@@ -16,9 +16,9 @@ It will include:
 - sub_station.f90    (load wave gauges file)
 
 If parallel computation is needed, add parallelization command such as "OMP_NUM_THREADS".
+For example,
 
-e.g. $ OMP_NUM_THREADS=8
-
-     $ gfortran -o llw -fopenmp main_llw.f90
+    $ OMP_NUM_THREADS=8
+    $ gfortran -o llw -fopenmp main_llw.f90
        
 Example will be uploaded in the near future.
