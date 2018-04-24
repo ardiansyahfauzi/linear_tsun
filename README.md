@@ -15,8 +15,8 @@ It will include:
 - sub_initheight.f90 (load initial water surface file)
 - sub_station.f90    (load wave gauges file)
 
-If parallel computation is needed, add parallelization command such as "OMP_NUM_THREADS", 
-  e.g. $ OMP_NUM_THREADS=8
-       $ gfortran -o llw -fopenmp main_llw.f90
+If parallel computation is needed, add parallelization command such as "OMP_NUM_THREADS" 
+e.g. $ OMP_NUM_THREADS=8
+     $ gfortran -o llw -fopenmp main_llw.f90
        
 Example will be uploaded in the near future.
