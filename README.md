@@ -4,8 +4,6 @@ This is a linear tsunami propagation model in spherical coordinate system with P
 This model is an extension of original tsunami propagation model in cartesian coordinate system written by Maeda (2016).
 Parallelization (OpenMP) is also applied in this model.
 
-This model was perfectly run on Ubuntu.
-
 # References
 Maeda, T., H. Tsushima, and T. Furumura (2016) An effective absorbing boundary condition for linear long-wave and linear dispersive wave tsunami simulations, Earth, Planets, and Space, 68, 63
 
