@@ -17,7 +17,8 @@ It will include:
 
 If parallel computation is needed, add parallelization command such as "OMP_NUM_THREADS".
 
-.$ OMP_NUM_THREADS=8
-.$ gfortran -o llw -fopenmp main_llw.f90
+e.g. $ OMP_NUM_THREADS=8
+
+     $ gfortran -o llw -fopenmp main_llw.f90
        
 Example will be uploaded in the near future.
