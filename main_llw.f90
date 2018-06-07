@@ -7,7 +7,7 @@
 !! 
 !! The governing equation of LLW is adopted from Nakamura's model.
 !! This code is partially modified by A. Fauzi
-!! Last modified on 2018.4.24
+!! Last modified on 2018.6.7
 !!
 !<
 !! ------------------------------------------------------------------------- !!
@@ -588,7 +588,7 @@ program llw
        end block
        
        !! ----------------------------
-       ! Modified by Fauzi
+       ! 
        ! To create output file of eta
        block
       

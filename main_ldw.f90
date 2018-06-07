@@ -668,7 +668,7 @@ program ldw
        end block
        
        !! ----------------------------
-       ! Modified by Fauzi
+       ! 
        ! To create output file of eta
        block
       

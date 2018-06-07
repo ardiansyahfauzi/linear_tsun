@@ -6,8 +6,7 @@
 
     integer :: i, j
     !! --
-   
-    ! modified by Fauzi
+
     open(21,file="../bath_in_new.dat", status='unknown')
     
     do i=1,nx
