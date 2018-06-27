@@ -12,7 +12,8 @@
     read(21,*)nst
     
     allocate( ist(nst), jst(nst), xst(nst), yst(nst) )
-    allocate( wav(nst,0 : int(nt / dt)) )
+!    allocate( wav(nst,0 : int(nt / dt)) )
+    allocate( wav(0:int(nt / dt), nst+1) )
    
     do i=1,nst
        read(21,'(i3, i5, i5)')j, ist(i), jst(i)

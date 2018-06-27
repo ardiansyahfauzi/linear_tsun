@@ -579,7 +579,7 @@ program llw
 !$OMP PARALLEL SHARED(wav) PRIVATE(i)
 !$OMP DO
             do i=1, nst
-               wav(i,it) = eta( ist(i), jst(i) )
+               wav(it,i) = eta( ist(i), jst(i) )
             end do
 !$OMP END DO
 !$OMP END PARALLEL
@@ -623,17 +623,14 @@ program llw
     character(256) :: fn
     integer, parameter :: io = 100
     !! --
-
-    do i=1, nst
-       write(fn,'(A,I3.3,A)') 'tsunami_', i, '.dat'
-       open(io, file=fn, action='write', status='unknown' )
-       do it=0, nt
-          if (mod(it*dt, real(tint)) == 0.0) then
-             write(io,*) it*dt, wav(i,it)
-          endif
-       end do
-       close(io)
-    end do
+    
+    open(io, file='obswv.dat', status='unknown' )
+    do it = 0, nt
+      if (mod(it*dt, real(tint)) == 0.0) then
+        write(io,'(f7.1, 10000f9.3)') it*dt, (wav(it,j), j=1, nst)
+      endif
+    enddo
+    close(io)
     
     open(21, file='zmax.dat', status='unknown')
     do i=1,nx
