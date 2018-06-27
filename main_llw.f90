@@ -7,7 +7,7 @@
 !! 
 !! The governing equation of LLW is adopted from Nakamura's model.
 !! This code is partially modified by A. Fauzi
-!! Last modified on 2018.6.7
+!! Last modified on 2018.6.27
 !!
 !<
 !! ------------------------------------------------------------------------- !!
