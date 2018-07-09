@@ -7,7 +7,7 @@
     integer :: i, j
     !! --
 
-    open(21,file="../bath_in_new.dat", status='unknown')
+    open(21,file="example/bath.dat", status='unknown')
     
     do i=1,nx
       read(21,*)(hh(i,j), j=1,ny)

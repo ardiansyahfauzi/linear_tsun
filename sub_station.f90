@@ -1,13 +1,12 @@
   !! ----------------------------------------------------------------------- !!
   !>
   !! Set station location.
-  !! nst, xst(:), yst(:), ist(:), jst(:) should be set here with memory alloc.
   !<
   block
 
     integer :: i, j
     
-    open(21,file = "../gages.dat", status = 'unknown') 
+    open(21,file = "example/gages.dat", status = 'unknown') 
     
     read(21,*)nst
     

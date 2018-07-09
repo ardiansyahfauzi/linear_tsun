@@ -9,7 +9,7 @@
     
     nx = 1184
     ny = 529
-    nt = 7200        !! in second [sec.]
+    nt = 3600       !! in second [sec.]
     tint = 1         !! interval time of output waveform [sec.]
 
     dx = 89.1085/3.0 !! in second [sec.]
@@ -21,6 +21,7 @@
       
     
     mov = 1          !! to create snapshot (0 for yes, 1 for no)
+    zmax_out = 1     !! to create zmax output (0 for yes, 1 for no)
     
     !! For children grid
     

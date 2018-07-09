@@ -7,7 +7,7 @@
 !! 
 !! The governing equation of LDW is adopted from Nakamura's model.
 !! This code is partially modified by A. Fauzi
-!! Last modified on 2018.6.27
+!! Last modified on 2018.7.9
 !!
 !<
 !! ------------------------------------------------------------------------- !!
@@ -30,7 +30,7 @@ program ldw
   integer            :: nt, tint               !< time step size
   real               :: dx,  dy                !< grid width
   real               :: dt                     !< time step
-  integer            :: mov                    !< snapshots
+  integer            :: mov, zmax_out          !< snapshots
 
   !! derived global variables
   real               :: dxi, dyi               !< inverse grid width
@@ -637,6 +637,8 @@ program ldw
        block
        
           integer :: i,j
+          
+          if (zmax_out==0) then
 !$OMP PARALLEL SHARED(zmax) PRIVATE(i,j)
 !$OMP DO
           do j=1, ny
@@ -648,6 +650,7 @@ program ldw
           enddo      
 !$OMP END DO
 !$OMP END PARALLEL
+       endif
        end block
 
        !! ------------------------------------------------------------------ !!
@@ -713,12 +716,14 @@ program ldw
       endif
     enddo
     close(io)
-   
+    
+    if (zmax_out==0) then
     open(21, file='zmaxd.dat', status='unknown')
     do i=1,nx
        write(21,'(10000f9.2)')(zmax(i,j), j=1,ny)
     enddo
     close(21)
+    endif
 
   end block
 
