@@ -558,7 +558,7 @@ program llw
        
           integer :: i,j
           
-          if (zmax_out==0) then
+          if (zmax_out.eq.0) then
 !$OMP PARALLEL SHARED(zmax) PRIVATE(i,j)
 !$OMP DO
           do j=1, ny
@@ -635,7 +635,7 @@ program llw
     enddo
     close(io)
     
-    if (zmax_out==0) then
+    if (zmax_out.eq.0) then
     open(21, file='zmax.dat', status='unknown')
     do i=1,nx
        write(21,'(10000f9.2)')(zmax(i,j), j=1,ny)
