@@ -148,6 +148,18 @@ program ldw
 
   include 'sub_station.f90'
   
+!! Waveform at gages is set to be the same as initial deformation
+  block
+    integer :: i
+!$OMP PARALLEL SHARED(wav) PRIVATE(i)
+!$OMP DO
+    do i=1, nst
+       wav(0,i) = eta( ist(i), jst(i) )
+    end do
+!$OMP END DO
+!$OMP END PARALLEL
+  end block
+  
   !! Create /out folder
   !! --
   if(mov.eq.0)then
@@ -383,8 +395,9 @@ program ldw
     nt = int(nt / dt)
 
     do it= 1, nt
-
-       if( mod(it*dt, real(60)) == 0 ) then
+       
+       if (mod((real(it) / real(nt))*100, real(20)) == 0) then
+!       if( mod(it*dt, real(60)) == 0 ) then
           ttt  = it * dt / 60.0
           prog = real(it) / real(nt)
           call system_clock(finish, clock_rate, clock_max)
