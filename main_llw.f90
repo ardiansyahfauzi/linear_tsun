@@ -122,6 +122,18 @@ program llw
 
   include 'sub_station.f90'
   
+  !! Waveform at gages is set to be the same as initial deformation
+  block
+    integer :: i
+!$OMP PARALLEL SHARED(wav) PRIVATE(i)
+!$OMP DO
+    do i=1, nst
+       wav(0,i) = eta( ist(i), jst(i) )
+    end do
+!$OMP END DO
+!$OMP END PARALLEL
+  end block
+
   !! Create /out folder
   !! --
   if(mov.eq.0)then
