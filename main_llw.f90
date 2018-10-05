@@ -330,8 +330,9 @@ program llw
     nt = int(nt / dt)
 
     do it= 1, nt
-
-       if( mod(it*dt, real(60)) == 0 ) then
+       
+       if (mod((real(it) / real(nt))*100, real(20)) == 0) then
+!       if( mod(it*dt, real(60)) == 0 ) then
           ttt  = it * dt / 60.0
           prog = real(it) / real(nt)
           call system_clock(finish, clock_rate, clock_max)
